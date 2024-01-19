@@ -1,4 +1,6 @@
-const getWeatherData = async (location: { lat: string; lon: string }) => {
+import { Coordinates } from "@/lib/types";
+
+const getWeatherData = async (location: Coordinates) => {
   const apiRes = await fetch(
     `https://api.openweathermap.org/data/3.0/onecall?lat=${location.lat}&lon=${location.lon}&units=metric&exclude={part}&appid=`,
   ).then((data) => data);
