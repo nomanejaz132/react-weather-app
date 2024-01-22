@@ -1,19 +1,12 @@
 import { useState } from "react";
 import useWeatherData from "./hooks/useWeatherData";
-import { formatSunTime } from "./lib/dateTimeUtils";
+// import { formatSunTime } from "./lib/dateTimeUtils";
 import { DEFAULT_LOCATION } from "./lib/config";
 
 function App() {
   const [location] = useState(DEFAULT_LOCATION.coordinates);
 
   const { weatherData, isFetchingWeather } = useWeatherData(location);
-
-  console.log(
-    weatherData,
-    "data results",
-    isFetchingWeather,
-    "isFetchingWeather",
-  );
 
   return (
     <div className="flex h-screen w-screen items-center justify-center gap-5">
@@ -45,17 +38,17 @@ function App() {
           </p>
           <p className="text-base text-black">
             Sunrise:{" "}
-            {formatSunTime(
+            {/* {formatSunTime(
               weatherData?.current?.sunrise,
               weatherData?.timezone_offset,
-            )}
+            )} */}
           </p>
           <p className="text-base text-black">
             Sunset:{" "}
-            {formatSunTime(
+            {/* {formatSunTime(
               weatherData?.current?.sunset,
               weatherData?.timezone_offset,
-            )}
+            )} */}
           </p>
           <p className="text-base text-black">
             UV Index: {weatherData?.current?.uvi * 10}
