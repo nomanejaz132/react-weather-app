@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useWeatherData from "./hooks/useWeatherData";
-// import { formatSunTime } from "./lib/dateTimeUtils";
+import { formatSunTime } from "./lib/dateTimeUtils";
 import { DEFAULT_LOCATION } from "./lib/config";
 
 function App() {
@@ -38,17 +38,17 @@ function App() {
           </p>
           <p className="text-base text-black">
             Sunrise:{" "}
-            {/* {formatSunTime(
+            {formatSunTime(
               weatherData?.current?.sunrise,
               weatherData?.timezone_offset,
-            )} */}
+            )}
           </p>
           <p className="text-base text-black">
             Sunset:{" "}
-            {/* {formatSunTime(
+            {formatSunTime(
               weatherData?.current?.sunset,
               weatherData?.timezone_offset,
-            )} */}
+            )}
           </p>
           <p className="text-base text-black">
             UV Index: {weatherData?.current?.uvi * 10}
