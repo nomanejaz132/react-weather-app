@@ -12,6 +12,21 @@ export function convertUTCTimeToDay(
   return dateFormatter.format(local_time);
 }
 
+export function getDayNameFromTimestamp(timestamp: number): string {
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const date = new Date(timestamp * 1000);
+  const dayIndex = date.getUTCDay();
+  return days[dayIndex];
+}
+
 export function formatSunTime(
   timestamp: number,
   timezoneOffset: number,
