@@ -3,8 +3,20 @@ import { Location } from "@/lib/types";
 export const DEFAULT_LOCATION: Location = {
   city: "Islamabad",
   coordinates: {
-    lat: "33.616251",
-    lon: "72.7564595",
+    // lat: "33.6844202",
+    // lon: "73.04788479999999",
+
+    // berlin
+    // lat: "52.52000659999999",
+    // lon: "13.404954",
+
+    // dublin
+    lat: "53.3498053",
+    lon: "-6.2603097",
+
+    //sydney
+    // lat: "33.8688197",
+    // lon: "151.2092955",
   },
 };
 
