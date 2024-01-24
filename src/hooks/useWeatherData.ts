@@ -4,7 +4,7 @@ import getWeatherData from "@/api/getWeatherData";
 
 export default function useWeatherData(location: Coordinates) {
   const { data: weatherData, isFetching: isFetchingWeather } = useQuery({
-    queryKey: ["data", location],
+    queryKey: ["wData", location],
     queryFn: () => getWeatherData(location),
     staleTime: 0,
     gcTime: 0,
