@@ -46,9 +46,9 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
       </div>
       <div>
         <img
-          src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`}
+          src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}@2x.png`}
           alt="weather icon"
-          className="h-9 w-9"
+          className="h-10 w-10"
         />
         <div className="font-semibold">{data?.weather[0]?.main}</div>
         <div className="flex gap-2 dark:text-neutral-500">

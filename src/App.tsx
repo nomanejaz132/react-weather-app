@@ -22,8 +22,8 @@ function App() {
   const { currentWeatherData, isFetchingCurrentWeather } =
     useCurrentWeatherData(location);
 
-  console.log(weatherData, "current day weather data");
-  console.log(weatherData?.daily[0], "daily weather data");
+  // console.log(weatherData, "weather data general");
+  // console.log(currentWeatherData, "weather data current");
 
   return (
     <div className="container mx-auto flex min-h-screen flex-col px-[1rem] py-4 antialiased selection:bg-black selection:text-white dark:bg-black dark:selection:bg-white dark:selection:text-black md:px-[2rem]">
@@ -93,7 +93,7 @@ function App() {
         {!isFetchingWeather && (
           <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
             <Card className="order-3 flex h-48 flex-col justify-between lg:order-2">
-              <CardHeader className="p-0">
+              <CardHeader>
                 <CardTitle>
                   <i>
                     <svg
@@ -130,7 +130,7 @@ function App() {
                   Sunset
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent>
                 <p>
                   {formatSunTime(
                     weatherData?.current?.sunset,
@@ -138,7 +138,7 @@ function App() {
                   )}
                 </p>
               </CardContent>
-              <CardFooter className="p-0">
+              <CardFooter>
                 <p>
                   Sunrise:
                   {formatSunTime(
@@ -218,26 +218,26 @@ function App() {
               </CardHeader>
               <CardContent>
                 <p className="mb-2">
-                  {/* {Math.round(uvIndexForToday)}
-                <br></br>
-                {uvIndexForToday <= 2
-                  ? "Low"
-                  : uvIndexForToday <= 5
-                    ? "Moderate"
-                    : uvIndexForToday <= 7
-                      ? "High"
-                      : "Very High"} */}
+                  {Math.round(weatherData?.daily[0].uvi * 10)}
+                  <br></br>
+                  {weatherData?.daily[0].uvi * 10 <= 2
+                    ? "Low"
+                    : weatherData?.daily[0].uvi * 10 <= 5
+                      ? "Moderate"
+                      : weatherData?.daily[0].uvi * 10 <= 7
+                        ? "High"
+                        : "Very High"}
                 </p>
-                {/* <Progress aria-label="UV Index" value={uvIndexForToday * 10} /> */}
+                {/* <Progress aria-label="UV Index" value={weatherData?.daily[0].uvi * 10} /> */}
               </CardContent>
               <CardFooter>
-                {/* <p>
-                {uvIndexForToday <= 2
-                  ? "No protection needed."
-                  : uvIndexForToday <= 5
-                    ? "Wear sunscreen."
-                    : "Take precautions."}
-              </p> */}
+                <p>
+                  {weatherData?.daily[0].uvi <= 2
+                    ? "No protection needed."
+                    : weatherData?.daily[0].uvi <= 5
+                      ? "Wear sunscreen."
+                      : "Take precautions."}
+                </p>
               </CardFooter>
             </Card>
             <Card className="order-6 flex h-48 flex-col justify-between">
@@ -317,18 +317,19 @@ function App() {
               </CardHeader>
               <CardContent>
                 <p>
-                  {/* {data.rain?.["1h"] || 0}mm <br></br>in the last 3h */}
+                  {weatherData.current?.rain?.["1h"] || 0}mm <br></br>in the
+                  last 1h
                 </p>
               </CardContent>
               <CardFooter>
                 <p>
-                  {/* {data.rain?.["1h"] !== undefined
-                  ? data.rain["1h"] <= 0.2
-                    ? "Light rain or drizzle. An umbrella may come in handy."
-                    : data.rain["1h"] <= 2.5
-                      ? "Moderate rain."
-                      : "Heavy rain."
-                  : "Conditions are dry."} */}
+                  {weatherData.current?.rain?.["1h"] !== undefined
+                    ? weatherData.current?.rain?.["1h"] <= 0.2
+                      ? "Light rain or drizzle. An umbrella may come in handy."
+                      : weatherData.current?.rain?.["1h"] <= 2.5
+                        ? "Moderate rain."
+                        : "Heavy rain."
+                    : "Conditions are dry."}
                 </p>
               </CardFooter>
             </Card>
@@ -353,16 +354,17 @@ function App() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {/* <p>{Math.floor(data.main.feels_like)}&deg;</p> */}
+                <p>{Math.floor(weatherData?.current?.feels_like)}&deg;</p>
               </CardContent>
               <CardFooter>
-                {/* <p>
-                {data.main.feels_like < data.main.temp
-                  ? "Feels colder than the actual temperature."
-                  : data.main.feels_like > data.main.temp
-                    ? "Feels warmer than the actual temperature."
-                    : "Feels like the actual temperature."}
-              </p> */}
+                <p>
+                  {weatherData?.current?.feels_like < weatherData?.current?.temp
+                    ? "Feels colder than the actual temperature."
+                    : weatherData?.current?.feels_like >
+                        weatherData?.current?.temp
+                      ? "Feels warmer than the actual temperature."
+                      : "Feels like the actual temperature."}
+                </p>
               </CardFooter>
             </Card>
             <Card className="order-8 flex h-48 flex-col justify-between">
@@ -386,15 +388,15 @@ function App() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p>74&deg;</p>
+                <p>{weatherData?.current?.humidity}&deg;</p>
               </CardContent>
               <CardFooter>
                 <p>
-                  {/* {data.main.humidity < 40
-                  ? "Low humidity. It might feel dry."
-                  : data.main.humidity < 70
-                    ? "Moderate humidity. Comfortable conditions."
-                    : "High humidity. It might feel humid and uncomfortable."} */}
+                  {weatherData?.current?.humidity < 40
+                    ? "Low humidity. It might feel dry."
+                    : weatherData?.current?.humidity < 70
+                      ? "Moderate humidity. Comfortable conditions."
+                      : "High humidity. It might feel humid and uncomfortable."}
                 </p>
               </CardFooter>
             </Card>
@@ -423,16 +425,16 @@ function App() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {/* <p>{data.visibility / 1000} km</p> */}
+                <p>{weatherData?.current?.visibility / 1000} km</p>
               </CardContent>
               <CardFooter>
-                {/* <p>
-                {data.visibility >= 10
-                  ? "It's perfectly clear right now."
-                  : data.visibility >= 5
-                    ? "Good visibility."
-                    : "Poor visibility. Exercise caution while driving or moving around."}
-              </p> */}
+                <p>
+                  {weatherData?.current?.visibility / 10 >= 10
+                    ? "It's perfectly clear right now."
+                    : weatherData?.current?.visibility / 10 >= 5
+                      ? "Good visibility."
+                      : "Poor visibility. Exercise caution while driving or moving around."}
+                </p>
               </CardFooter>
             </Card>
             <Card className="order-10 flex h-48 flex-col justify-between">
@@ -456,15 +458,18 @@ function App() {
                   Pressure
                 </CardTitle>
               </CardHeader>
-              <CardContent>{/* <p>{data.main.pressure} hPa</p> */}</CardContent>
+              <CardContent>
+                <p>{weatherData?.current?.pressure} hPa</p>
+              </CardContent>
               <CardFooter>
-                {/* <p>
-                {data.main.pressure < 1000
-                  ? "Low pressure. Expect changes in the weather."
-                  : data.main.pressure >= 1000 && data.main.pressure <= 1010
-                    ? "Normal pressure. Typical weather conditions."
-                    : "High pressure. Expect stable and clear weather."}
-              </p> */}
+                <p>
+                  {weatherData?.current?.pressure < 1000
+                    ? "Low pressure. Expect changes in the weather."
+                    : weatherData?.current?.pressure >= 1000 &&
+                        weatherData?.current?.pressure <= 1010
+                      ? "Normal pressure. Typical weather conditions."
+                      : "High pressure. Expect stable and clear weather."}
+                </p>
               </CardFooter>
             </Card>
           </section>
